@@ -1,13 +1,11 @@
 package com.example.test.services;
 
 import com.example.test.models.Categories;
-import com.example.test.models.Posts;
 import com.example.test.respositories.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -48,10 +46,6 @@ public class CategoryService {
             return categoryRepo.save(cateUpdate); // Lưu và trả về bản ghi đã cập nhật
         }).orElseThrow(() ->new RuntimeException("Not Found with id:" + id));
     }
-
-
-
-
 
 
 

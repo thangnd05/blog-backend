@@ -1,14 +1,10 @@
 package com.example.test.services;
-import com.example.test.Dto.PostDto;
 import com.example.test.models.Posts;
-import com.example.test.respositories.CommentRepo;
 import com.example.test.respositories.PostRespo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +46,6 @@ public class PostService {
     }
 
     @Transactional
-
     //sửa bài viết
     public Posts update(Long id,Posts post){
         return postRespo.findById(id).map(postUpdate -> {
@@ -69,8 +64,6 @@ public class PostService {
             return postRespo.save(postApproved);
         }).orElseThrow(() ->new RuntimeException("Not Found with id:" + id));
     }
-
-
 
     @Transactional
     public void deleteById(Long id){
@@ -93,6 +86,12 @@ public class PostService {
     public List<Posts>getPostByUserId(Long userId){
         return  postRespo.findByUserId(userId);
     }
+
+    @Transactional
+    public void deletePostByCategoryId(Long categoryId) {
+        postRespo.deleteByCategoryId(categoryId);
+    }
+
 
 
 

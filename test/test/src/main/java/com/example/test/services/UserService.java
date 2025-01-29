@@ -1,30 +1,21 @@
 package com.example.test.services;
 import com.example.test.Dto.LoginDto;
-import com.example.test.Dto.RegisterDto;
-import com.example.test.models.Posts;
+
 import com.example.test.models.Users;
 import com.example.test.respositories.UserRespo;
-import com.example.test.util.EmailUtil;
-import com.example.test.util.OtpUtil;
-import jakarta.mail.MessagingException;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserService {

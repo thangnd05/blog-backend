@@ -1,6 +1,5 @@
 package com.example.test.controller;
 
-import com.example.test.models.Categories;
 import com.example.test.models.Posts;
 
 import com.example.test.services.CategoryService;
@@ -12,13 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -124,7 +121,6 @@ public class PosTController {
     }
 
     //xóa bài viết theo id
-    @Transactional
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<Void> deletePostById(@PathVariable Long id) {
         Optional<Posts> post = postService.getById(id);

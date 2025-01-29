@@ -1,8 +1,8 @@
 package com.example.test.controller;
 
 import com.example.test.models.Categories;
-import com.example.test.models.Posts;
 import com.example.test.services.CategoryService;
+import com.example.test.services.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +17,15 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class CategoryController {
     private CategoryService categoryService;
+    private PostService postService;
+
     @Autowired
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, PostService postService) {
         this.categoryService = categoryService;
+        this.postService = postService;
     }
+
+
     @GetMapping("/category")
     public List<Categories> getAll(){
         return categoryService.getAllCategory();
@@ -41,6 +46,7 @@ public class CategoryController {
         Optional<Categories> category = categoryService.findById(id);
         if (category.isPresent()) {
             categoryService.DeleteCategorybyId(id);
+            postService.deletePostByCategoryId(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

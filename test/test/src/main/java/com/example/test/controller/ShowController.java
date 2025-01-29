@@ -3,15 +3,12 @@ import com.example.test.models.Users;
 import com.example.test.respositories.UserRespo;
 import com.example.test.services.PostService;
 import com.example.test.services.UserService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 import java.time.LocalDateTime;

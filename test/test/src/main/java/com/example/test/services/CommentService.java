@@ -1,14 +1,12 @@
 package com.example.test.services;
 
 import com.example.test.models.Comments;
-import com.example.test.models.Users;
 import com.example.test.respositories.CommentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +60,7 @@ public class CommentService {
     }
 
 
+    @Transactional
     public void deleteCommentsByPostId(Long postId) {
         commentRepo.deleteByPostId(postId);
     }

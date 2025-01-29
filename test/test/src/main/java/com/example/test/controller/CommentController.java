@@ -1,7 +1,6 @@
 package com.example.test.controller;
 
 import com.example.test.models.Comments;
-import com.example.test.models.Users;
 import com.example.test.services.CommentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
