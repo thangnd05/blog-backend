@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//Giúp Spring Security lấy thông tin tài khoản từ database.
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

@@ -24,7 +24,7 @@ public class AuthService {
         //Tìm kiếm người dùng qua email:
         Optional<Users> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
-            //ấy thông tin người dùng ra (userOptional.get())
+            //lấy thông tin người dùng ra (userOptional.get())
             Users user = userOptional.get();
 
             // Tạo reset token

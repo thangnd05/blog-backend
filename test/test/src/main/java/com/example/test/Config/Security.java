@@ -58,11 +58,6 @@ public class Security {
 //                                .requestMatchers("/admin/**").hasRole("ADMIN") // Chỉ ADMIN được phép truy cập
                                 .anyRequest().permitAll()
                 )
-//                .formLogin(form -> form
-//                        .loginPage("/admin/user")
-////                        .permitAll()
-//
-//                )
 
 
                 .httpBasic(Customizer.withDefaults()) // Nếu bạn muốn sử dụng HTTP Basic Authentication, nếu không có thể bỏ qua

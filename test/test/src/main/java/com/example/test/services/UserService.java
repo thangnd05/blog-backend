@@ -59,7 +59,9 @@ public class UserService {
 
     @Transactional
     public ResponseEntity<Users> loginUser(LoginDto loginDto) {
-        Optional<Users> userOptional = userRespo.findByUsername(loginDto.getUsername());
+        Optional<Users> userOptional = userRespo.findByUsernameOrEmail(loginDto.getUsername(),loginDto.getUsername());
+        System.out.println("Đang tìm người dùng với tên đăng nhập hoặc email: " + userOptional);  // Log thông tin
+
         if (userOptional.isPresent()) {
             Users user = userOptional.get();
             boolean isPasswordMatch = passwordEncoder.matches(loginDto.getPassword(), user.getPassword());
@@ -88,6 +90,9 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Người dùng không tồn tại"));
         if (user.getFullname() != null) {
             existingUser.setFullname(user.getFullname());
+        }
+        if (user.getUsername() != null) {
+            existingUser.setUsername(user.getUsername());
         }
         if (user.getEmail() != null) {
             existingUser.setEmail(user.getEmail());
@@ -121,5 +126,40 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Người dùng không tồn tại"));
         return user.getEmail();
     }
+
+    public boolean changePassword(Long userId, String oldPassword, String newPassword, String confirmPassword) {
+        // Kiểm tra mật khẩu mới và mật khẩu xác nhận có trùng nhau không
+        if (!newPassword.equals(confirmPassword)) {
+            return false; // Mật khẩu xác nhận không khớp
+        }
+
+        Optional<Users> userOptional = userRespo.findById(userId);
+        if (userOptional.isPresent()) {
+            Users user = userOptional.get();
+
+            // Kiểm tra mật khẩu cũ có đúng không
+            if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+                return false; // Mật khẩu cũ không đúng
+            }
+
+            // Kiểm tra mật khẩu mới có trùng với mật khẩu cũ không
+            if (passwordEncoder.matches(newPassword, user.getPassword())) {
+                return false; // Mật khẩu mới không được trùng mật khẩu cũ
+            }
+
+            // Mã hóa mật khẩu mới và cập nhật
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRespo.save(user);
+
+            return true; // Thành công
+        }
+
+        return false; // Người dùng không tồn tại
+    }
+
+
+
+
+
 
 }

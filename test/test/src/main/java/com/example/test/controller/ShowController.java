@@ -3,6 +3,7 @@ import com.example.test.models.Users;
 import com.example.test.respositories.UserRespo;
 import com.example.test.services.PostService;
 import com.example.test.services.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -96,9 +97,23 @@ public class ShowController {
     }
 
 
+    @PutMapping("/change-password/{id}")
+    public ResponseEntity<?> changePassword(@PathVariable Long id,
+                                            @RequestParam String oldPassword,
+                                            @RequestParam String newPassword,
+                                            @RequestParam String confirmPassword) {
+        boolean isChanged = userService.changePassword(id, oldPassword, newPassword, confirmPassword);
 
+        if (isChanged) {
+            return ResponseEntity.ok("Đổi mật khẩu thành công!");
+        } else {
+            return ResponseEntity.badRequest().body("Đổi mật khẩu thất bại! Vui lòng kiểm tra lại thông tin.");
+        }
+    }
 
 }
+
+
 
 
 

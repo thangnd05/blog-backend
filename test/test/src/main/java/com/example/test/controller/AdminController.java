@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3001") // Cho phép frontend truy cập
@@ -35,4 +37,9 @@ public class AdminController {
             return ResponseEntity.status((HttpStatus.INTERNAL_SERVER_ERROR)).build();
         }
     }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @GetMapping("/posts")
+//    public List<Posts> showPosts() {
+//        return postService.getAll();
+//    }
 }
