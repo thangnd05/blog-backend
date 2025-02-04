@@ -73,7 +73,7 @@ public class PostService {
     //tìm kiếm bài viết bằng tiêu đề
     @Transactional
     public List<Posts>searchPostByTile(String title){
-        return postRespo.findByTitleContainingIgnoreCase(title);
+        return postRespo.findByTitleContainingIgnoreCaseAndStatus(title, Posts.PostStatus.Approved);
     }
 
 

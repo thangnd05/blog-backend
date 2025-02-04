@@ -38,8 +38,8 @@ public class PosTController {
 
     //hiển thị toàn bộ bài viết đã duyệt
     @GetMapping("/postApprove")
-    public ResponseEntity<List<Posts>>getAllPost(){
-        List<Posts>postsApproved=postService.getAllPostApproved();
+    public ResponseEntity<List<Posts>> getAllPost() {
+        List<Posts> postsApproved = postService.getAllPostApproved();
         return ResponseEntity.ok(postsApproved);
     }
 
@@ -48,10 +48,7 @@ public class PosTController {
     @GetMapping("/search")
     public ResponseEntity<List<Posts>> searchPostsByTitle(@RequestParam String title) {
         List<Posts> posts = postService.searchPostByTile(title);
-//        if (posts.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-        return new ResponseEntity<>(posts, HttpStatus.OK);
+        return ResponseEntity.ok(posts);
     }
 
     //Tạo bài viết
@@ -63,8 +60,7 @@ public class PosTController {
             @RequestParam("categoryId") Long categoryId,
             @RequestParam(value = "file", required = false) MultipartFile file
 //            @RequestParam(value = "categoryName") String categoryName  // Thêm categoryId
-    )
-    {
+    ) {
         try {
             // Định dạng lại nội dung nếu cần
             String formattedContent = content.replace("\n", "<br />");
@@ -94,9 +90,9 @@ public class PosTController {
 
     //cập nhật bài viết
     @PutMapping("/posts/{id}")
-    public ResponseEntity<Posts>UpdateBlog(@Valid @PathVariable Long id, @RequestBody Posts post) {
+    public ResponseEntity<Posts> UpdateBlog(@Valid @PathVariable Long id, @RequestBody Posts post) {
         try {
-            Posts update = postService.update(id,post);
+            Posts update = postService.update(id, post);
             return ResponseEntity.ok(update);
         } catch (Exception e) {
             return ResponseEntity.status((HttpStatus.INTERNAL_SERVER_ERROR)).build();
@@ -111,10 +107,10 @@ public class PosTController {
 
     //hiển thị bài viết theo id
     @GetMapping("/posts/{id}")
-    public ResponseEntity<Posts> getPost( @PathVariable(required = false) Long id) {
+    public ResponseEntity<Posts> getPost(@PathVariable(required = false) Long id) {
         Optional<Posts> post = postService.getById(id);
 //        if (post.isPresent()) {
-            return new ResponseEntity<>(post.get(), HttpStatus.OK);
+        return new ResponseEntity<>(post.get(), HttpStatus.OK);
 //        } else {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
@@ -136,42 +132,25 @@ public class PosTController {
 
     //lấy bài viết theo user id
     @GetMapping("/posts/user/{id}")
-    public ResponseEntity<List<Posts>>getPostByUserId(@PathVariable Long id){
-        List<Posts>posts=postService.getPostByUserId(id);
+    public ResponseEntity<List<Posts>> getPostByUserId(@PathVariable Long id) {
+        List<Posts> posts = postService.getPostByUserId(id);
 //        if(!posts.isEmpty()){
-            return new ResponseEntity<>(posts,HttpStatus.OK);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
 //        } else {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
     }
 
     @GetMapping("/posts/category/{id}")
-    public ResponseEntity<List<Posts>>getPostByCategoryId(@PathVariable Long id){
-        List<Posts>posts=postService.findPostByCategoryId(id);
+    public ResponseEntity<List<Posts>> getPostByCategoryId(@PathVariable Long id) {
+        List<Posts> posts = postService.findPostByCategoryId(id);
 //        if(!posts.isEmpty()){
-            return new ResponseEntity<>(posts,HttpStatus.OK);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
 //        } else {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
 
     }
-
-
-
-
-
-
-
-
-
-//    @GetMapping("/post")
-//    public ResponseEntity<Posts> getPostByTitle(@RequestParam String postName) {
-//        Optional<Posts> post = postService.getPostByTitle(postName);
-//        if (post.isPresent()) {
-//            return new ResponseEntity<>(post.get(), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//
-//    }
 }
+
+

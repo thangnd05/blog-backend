@@ -55,7 +55,8 @@ public class ImageController {
                     .contentType(MediaType.IMAGE_JPEG) // Hoặc IMAGE_PNG, tùy định dạng ảnh.
                     .body(imageData);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return null;
         }
     }
 

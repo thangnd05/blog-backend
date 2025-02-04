@@ -107,7 +107,7 @@ public class ShowController {
         if (isChanged) {
             return ResponseEntity.ok("Đổi mật khẩu thành công!");
         } else {
-            return ResponseEntity.badRequest().body("Đổi mật khẩu thất bại! Vui lòng kiểm tra lại thông tin.");
+            return ResponseEntity.badRequest().body("Đổi mật khẩu thất bại! Vui lòng kiểm tra lại");
         }
     }
 
