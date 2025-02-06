@@ -62,13 +62,11 @@ public class PosTController {
 //            @RequestParam(value = "categoryName") String categoryName  // Thêm categoryId
     ) {
         try {
-            // Định dạng lại nội dung nếu cần
-            String formattedContent = content.replace("\n", "<br />");
 
             // Tạo bài viết mới từ các trường dữ liệu
             Posts post = new Posts();
             post.setTitle(title);
-            post.setContent(formattedContent);
+            post.setContent(content);
             post.setUserId(userId);
             post.setCategoryId(categoryId);
             post.setStatus(Posts.PostStatus.Pending);

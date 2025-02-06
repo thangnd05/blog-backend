@@ -22,12 +22,12 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Optional<Users> user = usersRepository.findByUsername("Admin");
+        Optional<Users> user = usersRepository.findByUsername("WinDe");
 
         if (user.isEmpty()) {
             Users admin = new Users();
             admin.setFullname("Admin");
-            admin.setUsername("Admin");
+            admin.setUsername("WinDe");
             admin.setPassword(passwordEncoder.encode("password456"));
             admin.setEmail("Thang@gmail.com");
             admin.setCreated_at(LocalDate.now());
