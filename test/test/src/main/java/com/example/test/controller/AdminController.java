@@ -42,4 +42,8 @@ public class AdminController {
 //    public List<Posts> showPosts() {
 //        return postService.getAll();
 //    }
+@GetMapping("/posts")
+public List<Posts> showPosts() {
+    return postService.getAll();
+}
 }

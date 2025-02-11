@@ -41,20 +41,30 @@ public class PostService {
         if (post.getPost_id() == null) {
             post.setCreated_at(LocalDate.now());
         }
+
         post.setUpdated_at(LocalDate.now());
         return postRespo.save(post);
     }
 
+
     @Transactional
     //sửa bài viết
-    public Posts update(Long id,Posts post){
+    public Posts update(Long id, Posts post) {
         return postRespo.findById(id).map(postUpdate -> {
+            // Chỉ thay đổi trạng thái khi bài viết đã được tìm thấy và chưa có trạng thái Approved
+            if (post.getStatus() == Posts.PostStatus.Approved) {
+                postUpdate.setStatus(Posts.PostStatus.Pending);  // Đổi trạng thái sang Pending nếu Approved
+            }
+
+            // Cập nhật các thuộc tính khác
             postUpdate.setTitle(post.getTitle());
             postUpdate.setContent(post.getContent());
             postUpdate.setUpdated_at(LocalDate.now());
+
             return postRespo.save(postUpdate); // Lưu và trả về bản ghi đã cập nhật
-        }).orElseThrow(() ->new RuntimeException("Not Found with id:" + id));
+        }).orElseThrow(() -> new RuntimeException("Not Found with id:" + id));
     }
+
 
 
     //Duyệt bài viết

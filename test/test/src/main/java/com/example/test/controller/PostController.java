@@ -22,14 +22,14 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "http://localhost:3001") // Cho phép frontend truy cập
 @RequestMapping("/api")
-public class PosTController {
+public class PostController {
     @Autowired
     private PostService postService;
     private CommentService commentService;
     private ImageService imageService;
     private CategoryService categoryService;
 
-    public PosTController(PostService postService, CommentService commentService, ImageService imageService, CategoryService categoryService) {
+    public PostController(PostService postService, CommentService commentService, ImageService imageService, CategoryService categoryService) {
         this.postService = postService;
         this.commentService = commentService;
         this.imageService = imageService;
@@ -91,6 +91,7 @@ public class PosTController {
     public ResponseEntity<Posts> UpdateBlog(@Valid @PathVariable Long id, @RequestBody Posts post) {
         try {
             Posts update = postService.update(id, post);
+
             return ResponseEntity.ok(update);
         } catch (Exception e) {
             return ResponseEntity.status((HttpStatus.INTERNAL_SERVER_ERROR)).build();
