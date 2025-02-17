@@ -15,7 +15,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://192.168.100.205:3000") // Cho phép frontend truy cập
 @RequestMapping("/admin")
 public class AdminController {
 
